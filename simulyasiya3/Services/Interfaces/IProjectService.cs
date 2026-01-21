@@ -13,5 +13,7 @@ namespace simulyasiya3.Services.Interfaces
 
         public Task<ProjectUpdateVM> GetUpdateAsync(int id);
         public Task UpdateAsync(ProjectUpdateVM vm);
+
+        public Task DeleteAsync(int id);
     }
 }

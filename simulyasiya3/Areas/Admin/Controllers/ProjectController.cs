@@ -58,5 +58,11 @@ namespace simulyasiya3.Areas.Admin.Controllers
             await _service.UpdateAsync(vm);
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _service.DeleteAsync(id);
+            return RedirectToAction("Index");
+        }
     }
 }

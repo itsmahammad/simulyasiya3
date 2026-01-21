@@ -116,5 +116,15 @@ namespace simulyasiya3.Services
             }
             await _context.SaveChangesAsync();
         }
+
+        public async Task DeleteAsync(int id)
+        {
+            var project = await _context.Projects.FindAsync(id);
+            if(project != null)
+            {
+                _context.Remove(project);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }
