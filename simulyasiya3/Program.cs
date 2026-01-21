@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using simulyasiya3.Data;
+using simulyasiya3.Helpers;
 using simulyasiya3.Services;
 using simulyasiya3.Services.Interfaces;
 
@@ -10,6 +11,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+builder.Services.AddScoped<IFileHelper, FileHelper>();
 
 var conString = builder.Configuration.GetConnectionString("Default") ??
      throw new InvalidOperationException("Connection string 'Default'" +
