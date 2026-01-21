@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace simulyasiya3.ViewModels.ProjectVMs
 {
-    public class ProjectCreateUpdateVM
+    public class ProjectCreateVM
     {
         public int? Id { get; set; }
         [Required]

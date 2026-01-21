@@ -8,7 +8,10 @@ namespace simulyasiya3.Services.Interfaces
         public Task<IEnumerable<ProjectUIVM>> ShowUIAsync();
         public Task<IEnumerable<ProjectVM>> ShowAdminAsync();
 
-        public Task<ProjectCreateUpdateVM> GetCreateAsync();
-        public Task CreateAsync(ProjectCreateUpdateVM vm);
+        public Task<ProjectCreateVM> GetCreateAsync();
+        public Task CreateAsync(ProjectCreateVM vm);
+
+        public Task<ProjectUpdateVM> GetUpdateAsync(int id);
+        public Task UpdateAsync(ProjectUpdateVM vm);
     }
 }

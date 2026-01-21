@@ -19,7 +19,7 @@ namespace simulyasiya3.Services
             _helper = helper;
         }
 
-        public async Task CreateAsync(ProjectCreateUpdateVM vm)
+        public async Task CreateAsync(ProjectCreateVM vm)
         {
             string imagePath = null;
             if (vm.Image != null)
@@ -41,9 +41,9 @@ namespace simulyasiya3.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<ProjectCreateUpdateVM> GetCreateAsync()
+        public async Task<ProjectCreateVM> GetCreateAsync()
         {
-            var vm = new ProjectCreateUpdateVM
+            var vm = new ProjectCreateVM
             {
                 Departments = await _context.Departments.Select(d => new SelectListItem
                 {
@@ -53,6 +53,7 @@ namespace simulyasiya3.Services
             };
             return vm;
         }
+
 
         public async Task<IEnumerable<ProjectVM>> ShowAdminAsync()
         {
@@ -76,6 +77,44 @@ namespace simulyasiya3.Services
                 ImageUrl = p.ImageUrl
             }).ToListAsync();
             return projects;
+        }
+
+        public async Task<ProjectUpdateVM> GetUpdateAsync(int id)
+        {
+            var project = await _context.Projects.FindAsync(id);
+            if (project == null)
+            {
+                return null!;
+            }
+            var vm = new ProjectUpdateVM
+            {
+                Id = project.Id,
+                Name = project.Name,
+                DepartmentId = project.DepartmentId,
+                CurrentImageUrl = project.ImageUrl,
+                Departments = await _context.Departments.Select(d => new SelectListItem
+                {
+                    Text = d.Name,
+                    Value = d.Id.ToString()
+                }).ToListAsync()
+            };
+            return vm;
+        }
+        public async Task UpdateAsync(ProjectUpdateVM vm)
+        {
+            var project = await _context.Projects.FindAsync(vm.Id);
+            if (project == null)
+                throw new Exception("Project not found");
+            project.Name = vm.Name;
+            project.DepartmentId = vm.DepartmentId;
+            if (vm.Image != null)
+            {
+                var name = _helper.UniqueName(vm.Image.FileName);
+                var path = _helper.GeneratePath("assets/images", name);
+                await _helper.UploadAsync(vm.Image, path);
+                project.ImageUrl = "/assets/images/" + name;
+            }
+            await _context.SaveChangesAsync();
         }
     }
 }

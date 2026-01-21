@@ -1,0 +1,30 @@
+﻿@model ProjectUpdateVM
+<form method="post" enctype="multipart/form-data" asp-action="Update" asp-area="Admin" asp-route-id="@Model.Id">
+
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" class="form-control" placeholder="Enter the project name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DepartmentId">Department</label>
+        <select asp-for="DepartmentId" asp-items="Model.Departments" class="form-control">
+            <option value="">Select a department</option>
+        </select>
+        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Current Image</label>
+            <img src="@Model.CurrentImageUrl" alt="Current Image" width="100" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Image">Change Image (optional)</label>
+        <input asp-for="Image" type="file" class="form-control" accept="image/*">
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

@@ -26,7 +26,7 @@ namespace simulyasiya3.Areas.Admin.Controllers
             return View(vm);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(ProjectCreateUpdateVM vm)
+        public async Task<IActionResult> Create(ProjectCreateVM vm)
         {
             if (!ModelState.IsValid)
             {
@@ -34,6 +34,28 @@ namespace simulyasiya3.Areas.Admin.Controllers
                 return View(vm);
             }
             await _service.CreateAsync(vm);
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> Update(int id)
+        {
+            var vm = await _service.GetUpdateAsync(id);
+            if(vm == null)
+            {
+                return NotFound();
+            }
+            return View(vm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(ProjectUpdateVM vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                vm.Departments = (await _service.GetUpdateAsync(vm.Id)).Departments;
+                vm.CurrentImageUrl = (await _service.GetUpdateAsync(vm.Id)).CurrentImageUrl;
+                return View(vm);
+                
+            }
+            await _service.UpdateAsync(vm);
             return RedirectToAction("Index");
         }
     }
