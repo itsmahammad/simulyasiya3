@@ -34,15 +34,27 @@ namespace simulyasiya3.Areas.Admin.Controllers
             await _service.CreateAsync(vm);
             return RedirectToAction("Index");
         }
-        public async Task<IActionResult> Delete()
-        {
-            return RedirectToAction("Index");
-        }
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
            await _service.DeleteAsync(id);
            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            var department = await _service.GetUpdateAsync(id);
+            return View(department);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(DepartmentCreateUpdateVM vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+            await _service.UpdateAsync(vm);
+            return RedirectToAction("Index");
         }
     }
 }

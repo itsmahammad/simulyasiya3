@@ -33,6 +33,7 @@ namespace simulyasiya3.Services
             await _context.SaveChangesAsync();
         }
 
+
         public async Task<IEnumerable<DepartmentVM>> ShowAdminAsync()
         {
             var departments = await _context.Departments.Select(d => new DepartmentVM
@@ -43,6 +44,23 @@ namespace simulyasiya3.Services
                 Projects = d.Projects.Count()
             }).ToListAsync();
             return departments;
+        }
+
+        public async Task<DepartmentCreateUpdateVM> GetUpdateAsync(int id)
+        {
+            var vm = await _context.Departments.FindAsync(id);
+            return new DepartmentCreateUpdateVM
+            {
+                Id = vm.Id,
+                Name = vm.Name
+            };
+        }
+
+        public async Task UpdateAsync(DepartmentCreateUpdateVM vm)
+        {
+            var department = await _context.Departments.FindAsync(vm.Id);
+            department.Name = vm.Name;
+            await _context.SaveChangesAsync();
         }
     }
 }

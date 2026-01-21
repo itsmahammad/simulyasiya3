@@ -10,5 +10,8 @@ namespace simulyasiya3.Services.Interfaces
 
         Task DeleteAsync(int id);
 
+        Task UpdateAsync(DepartmentCreateUpdateVM vm);
+
+        Task<DepartmentCreateUpdateVM> GetUpdateAsync(int id);
     }
 }
