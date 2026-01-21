@@ -9,6 +9,5 @@ namespace simulyasiya3.Models
         [Required, MaxLength(32)]
         public string Name { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
-        public bool IsDeleted { get; set; } = false;
     }
 }

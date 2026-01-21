@@ -10,11 +10,5 @@ namespace simulyasiya3.Data
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Project>().HasQueryFilter(p => !p.IsDeleted);
-            modelBuilder.Entity<Department>().HasQueryFilter(d => !d.IsDeleted);
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }

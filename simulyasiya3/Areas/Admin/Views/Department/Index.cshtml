@@ -1,0 +1,31 @@
+﻿@model IEnumerable<DepartmentVM>
+
+<table class="table table-bordered table-dark">
+    
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Projects</th>
+            <th scope="col">Created</th>
+            <th scope="col"><a asp-action="Create" asp-controller="Department" class="btn btn-primary">Create</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var department in Model)
+        {
+            <tr>
+                <th scope="row">@department.Id</th>
+                <td>@department.Name</td>
+                <td>@department.Projects</td>
+                <td>@department.Created</td>
+                <td>
+                    <form method="post" asp-action="Delete" asp-controller="Department" asp-route-id="@department.Id">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    
+    </tbody>
+</table>
