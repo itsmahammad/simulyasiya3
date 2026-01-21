@@ -1,0 +1,37 @@
+﻿@using simulyasiya3.ViewModels.AccountVMs
+@model RegisterVM
+<div class="container" style="padding-top: 150px">
+    <div class="row">
+        <form method="post" asp-controller="Account" asp-action="Register">
+            <div class="form-group">
+                <label asp-for="Email">Email address</label>
+                <input asp-for="Email" type="email" class="form-control" placeholder="Enter email">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FullName">FullName</label>
+                <input asp-for="FullName" type="text" class="form-control" placeholder="Enter fullname">
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName">Username</label>
+                <input asp-for="UserName" type="text" class="form-control" placeholder="Enter username">
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input type="password" class="form-control" asp-for="Password" placeholder="enter password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword">Password</label>
+                <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="enter password">
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+
+</div>
+   

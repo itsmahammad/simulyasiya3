@@ -86,7 +86,19 @@
                             <li class="scroll-to-section"><a href="#portfolio">Projects</a></li>
                             <li class="scroll-to-section"><a href="#blog">Blog</a></li>
                             <li class="scroll-to-section"><a href="#contact">Contact</a></li>
-                            <li class="scroll-to-section"><div class="border-first-button"><a href="#contact">Free Quote</a></div></li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <button class="btn btn-primary">@User.Identity.Name</button>
+                                <form asp-action="Logout" asp-controller="Account" method="post">
+                                    <button class="btn btn-danger">Logout</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <a class="btn btn-primary" asp-action="Register" asp-controller="Account">Register</a>
+                                <a class="btn btn-success" asp-action="Login" asp-controller="Account">Login</a>
+                            }
+
                         </ul>
                         <a class='menu-trigger'>
                             <span>Menu</span>

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using simulyasiya3.Services.Interfaces;
 using simulyasiya3.ViewModels.DepartmentVMs;
 
 namespace simulyasiya3.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class DepartmentController : Controller
     {
         private readonly IDepartmentService _service;
