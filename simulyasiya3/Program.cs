@@ -1,10 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using simulyasiya3.Data;
+using simulyasiya3.Services;
+using simulyasiya3.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 
 var conString = builder.Configuration.GetConnectionString("Default") ??
      throw new InvalidOperationException("Connection string 'Default'" +
